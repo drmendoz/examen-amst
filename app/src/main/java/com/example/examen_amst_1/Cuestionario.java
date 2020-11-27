@@ -1,5 +1,6 @@
 package com.example.examen_amst_1;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,17 +39,16 @@ public class Cuestionario extends AppCompatActivity {
     }
 
     public void respondiendo2(View view) {
-        boolean esCorrecta= formulario.responderPregunta(0);
+        boolean esCorrecta= formulario.responderPregunta(1);
         manejarRespuesta(esCorrecta);
-
     }
     public void respondiendo3(View view) {
-        boolean esCorrecta= formulario.responderPregunta(0);
+        boolean esCorrecta= formulario.responderPregunta(2);
         manejarRespuesta(esCorrecta);
 
     }
     public void respondiendo4(View view) {
-        boolean esCorrecta= formulario.responderPregunta(0);
+        boolean esCorrecta= formulario.responderPregunta(3);
         manejarRespuesta(esCorrecta);
 
     }
@@ -57,13 +57,17 @@ public class Cuestionario extends AppCompatActivity {
         if(esCorrecta){
             int preguntadas= formulario.getPreguntadas();
             if(preguntadas==4){
-
+                Intent intent = new Intent(this, CodigoQR.class);
+                startActivity(intent);
             }else{
                 formulario.getPregunta();
                 construirNuevaPregunta();
             }
         }else{
-
+            Intent intent = new Intent(this, Resultado.class);
+            String correctas= formulario.getCorrectas();
+            intent.putExtra("correctas", correctas);
+            startActivity(intent);
         }
     }
 
@@ -74,7 +78,7 @@ public class Cuestionario extends AppCompatActivity {
         button1.setText(pregunta.getRespuesta(0));
         button2.setText(pregunta.getRespuesta(1));
         button3.setText(pregunta.getRespuesta(2));
-        button1.setText(pregunta.getRespuesta(3));
+        button4.setText(pregunta.getRespuesta(3));
     }
 
 

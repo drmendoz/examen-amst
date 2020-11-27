@@ -9,6 +9,7 @@ public class Formulario {
    int correctas;
    int preguntadas=0;
    private Pregunta preguntaActual;
+   List<Integer> visitados= new ArrayList<Integer>();
    public Formulario(){
         crearPreguntas();
    }
@@ -20,31 +21,31 @@ public class Formulario {
        respuesta1.add("Perdió su brazo derecho");
        respuesta1.add("Perdió su pierna derecha");
        respuesta1.add("Él perdió");
-       Pregunta pregunta1= new Pregunta(" ¿Qué le pasó a Anakin Skywalker durante la batalla con el Conde Dooku?", respuesta1,1);
+       Pregunta pregunta1= new Pregunta("  ¿Qué le pasó a Anakin Skywalker durante la batalla con el Conde Dooku?", respuesta1,1);
        List<String> respuesta2= new ArrayList<String>();
-       respuesta2.add("Perdió su pierna izquierda");
-       respuesta2.add("Perdió su brazo derecho");
-       respuesta2.add("Perdió su pierna derecha");
-       respuesta2.add("Él perdió");
-       Pregunta pregunta2= new Pregunta(" ¿Qué le pasó a Anakin Skywalker durante la batalla con el Conde Dooku?", respuesta2,2);
+       respuesta2.add("Jay Laga'aia");
+       respuesta2.add("Temuera Morrison");
+       respuesta2.add("Ahmed Best");
+       respuesta2.add("Joel Edgerton");
+       Pregunta pregunta2= new Pregunta(" ¿Quién hizo el papel del comandante Cody?", respuesta2,1);
        List<String> respuesta3= new ArrayList<String>();
-       respuesta3.add("Perdió su pierna izquierda");
-       respuesta3.add("Perdió su brazo derecho");
-       respuesta3.add("Perdió su pierna derecha");
-       respuesta3.add("Él perdió");
-       Pregunta pregunta3= new Pregunta(" ¿Qué le pasó a Anakin Skywalker durante la batalla con el Conde Dooku?", respuesta3,3);
+       respuesta3.add("Su mano izquierda");
+       respuesta3.add("Su pie izquierdo");
+       respuesta3.add("Su mano derecha");
+       respuesta3.add("Su pierna izquierda");
+       Pregunta pregunta3= new Pregunta("  ¿Qué perdió Luke Skywalker en su pelea con Darth Vader?", respuesta3,2);
        List<String> respuesta4= new ArrayList<String>();
-       respuesta4.add("Perdió su pierna izquierda");
-       respuesta4.add("Perdió su brazo derecho");
-       respuesta4.add("Perdió su pierna derecha");
-       respuesta4.add("Él perdió");
-       Pregunta pregunta4= new Pregunta(" ¿Qué le pasó a Anakin Skywalker durante la batalla con el Conde Dooku?", respuesta4,4);
+       respuesta4.add("Su fe en el Lado Luminoso de la Fuerza");
+       respuesta4.add("Su fe en sus amigos");
+       respuesta4.add("Su falta de visión");
+       respuesta4.add("Su resistencia al Lado Oscuro de la Fuerza");
+       Pregunta pregunta4= new Pregunta(" Según el Emperador, ¿cuál era la debilidad de Luke Skywalker?", respuesta4,1);
        List<String> respuesta5= new ArrayList<String>();
-       respuesta5.add("Perdió su pierna izquierda");
-       respuesta5.add("Perdió su brazo derecho");
-       respuesta5.add("Perdió su pierna derecha");
-       respuesta5.add("Él perdió");
-       Pregunta pregunta5= new Pregunta(" ¿Qué le pasó a Anakin Skywalker durante la batalla con el Conde Dooku?", respuesta5,5);
+       respuesta5.add("Tatooine");
+       respuesta5.add("Geonosis");
+       respuesta5.add("Naboo");
+       respuesta5.add("Coruscant");
+       Pregunta pregunta5= new Pregunta(" ¿Dónde comenzaron las Guerras Clon?", respuesta5,1);
        preguntas.add(pregunta1);
        preguntas.add(pregunta2);
        preguntas.add(pregunta3);
@@ -55,9 +56,13 @@ public class Formulario {
 
    public Pregunta getPregunta(){
        Random rand = new Random();
-
        int n = rand.nextInt(4) + 1;
+       while (visitados.contains(n)){
+           n = rand.nextInt(4) + 1;
+       }
+       visitados.add(n);
        preguntaActual=preguntas.get(n);
+       preguntadas++;
        return preguntaActual;
    }
 
@@ -69,10 +74,20 @@ public class Formulario {
        return esCorrecta;
    }
 
+   public String getCorrectas(){
+       StringBuilder sb = new StringBuilder(); // or StringBuffer
+       sb.append(correctas);
+       return sb.toString();
+   }
    public int getPreguntadas(){
        return preguntadas;
    }
    public Pregunta getPreguntaActual(){
        return  preguntaActual;
+   }
+
+   public void resetearFormulario(int i){
+       correctas=0;
+       preguntadas=0;
    }
 }

@@ -43,6 +43,7 @@
         android:layout_height="58dp"
         android:layout_marginTop="20dp"
         android:background="@color/black"
+        android:onClick="salirInicio"
         android:text="Salir"
         android:textColor="#ffff"
         android:textSize="20dp" />
